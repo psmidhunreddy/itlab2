@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 3 - VR</title>
+    <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://scis.uohyd.ac.in/~chakcs/WebVRAssets/scis_poster.js"></script>
+    <script src="objects.js"></script>
+</head>
+<body>
+    <a-scene>
+        <a-entity light="type: ambient; color: #FFFFFF; intensity: 3"></a-entity>
+        <a-assets>
+            <img id="myVideo" src="assets/r1.jpg">
+            <img id="room2" src="assets/r2.jpg">
+            <img id="room3" src="assets/r3.jpg">
+            <img id="floor" src="assets/floor.jpg">
+            <img id="panel" src="assets/vpanel.jpg">
+            <img id="stage" src="assets/stage.jpg">
+            <img id="door" src="assets/door.png">
+            <video id="1" src="assets/1.mp4" playsinline></video>
+            <video id="2" src="assets/2.mp4" playsinline></video>
+            <video id="3" src="assets/3.mp4" playsinline></video>
+            <video id="4" src="assets/4.mp4" playsinline></video>
+            <video id="5" src="assets/5.mp4" playsinline></video>
+        </a-assets>        
+        <a-camera cursor="rayOrigin: mouse" position="0 2 15"></a-camera>
+        <a-plane height="5" width="9" color="#A8E6CF" side="double" position="0 2.5 0">
+            <a-box height="3.25" width="7" depth="0.05" position="0 0.5 0.1" src="#panel"></a-box><!-- panel -->
+            <a-video  class="clickable" id="videoPanel" src="#myVideo" height="3" width="5.15" position="-0.8 0.5 0.15"></a-video>
+            <a-entity position="-0.8 -1.2 0.15">
+                <a-plane id="playPauseBtn" width="1.5" height="0.5" color="blue"></a-plane>
+                <a-text id="btnText" value="Play" align="center" color="white" position="0 0 0.01"></a-text>
+            </a-entity>
+            <a-entity position="2.6 1.7 0.15">
+                <a-plane onclick="videoTrig(1)" id="video1"  width="1.5" height="0.5" color="green"></a-plane>
+                <a-text position="0 0 0.01" value="C language" align="center" color="white"></a-text>
+            </a-entity>
+            <a-entity position="2.6 1.1 0.15">
+                <a-plane onclick="videoTrig(2)" id="video2" width="1.5" height="0.5" color="green"></a-plane>
+                <a-text position="0 0 0.01" value="C++ in 100 sec" align="center" color="white"></a-text>
+            </a-entity>
+            <a-entity position="2.6 0.5 0.15">
+                <a-plane onclick="videoTrig(3)" id="video3" width="1.5" height="0.5" color="green"></a-plane>
+                <a-text position="0 0 0.01" value="Java in 100 sec" align="center" color="white"></a-text>
+            </a-entity>
+            <a-entity position="2.6 -0.1 0.15">
+                <a-plane onclick="videoTrig(4)" id="video4" width="1.5" height="0.5" color="green"></a-plane>
+                <a-text position="0 0 0.01" value="Intro to Linux" align="center" color="white"></a-text>
+            </a-entity>
+            <a-entity position="2.6 -0.7 0.15">
+                <a-plane onclick="videoTrig(5)" id="video5" width="1.5" height="0.5" color="green"></a-plane>
+                <a-text position="0 0 0.01" value="ML in 100 sec" align="center" color="white"></a-text>
+            </a-entity>
+            <a-box width="9" height="0.15" depth="0.025" color="#D9D9D9" position="0 -2.425 0.015"></a-box>
+        </a-plane> <!-- front wall-->
+        
+        <a-plane height="5" width="6" color="#A8E6CF"  rotation="0 90 0" position="-4.5 2.5 3" side="double">
+            <a-box width="6" height="0.15" depth="0.025" color="#D9D9D9" position="0 -2.425 0.015"></a-box>
+        </a-plane>
+        <a-plane height="5" width="6" color="#A8E6CF" side="double" rotation="0 90 0" position="4.5 2.5 3">
+            <a-box width="6" height="0.15" depth="0.025" color="#D9D9D9" position="0 -2.425 -0.015"></a-box>
+        </a-plane>
+        
+        <a-entity height="5" width="9" position="0 2.5 6">
+            <a-box width="3.5" height="0.15" depth="0.025" color="#D9D9D9" position="-2.8 -2.425 -0.015"></a-box>
+            <a-box width="3.5" height="0.15" depth="0.025" color="#D9D9D9" position="2.8 -2.425 -0.015"></a-box>
+            <a-text value="Online Lecture Room" position="-2 1.3 0.01" scale="2 2 2"color="blue"></a-text>
+            <a-plane height="5" width="3.5" color="#A8E6CF" side="double" position="2.8 0 0"></a-plane>
+            <a-plane height="5" width="3.5" color="#A8E6CF" side="double" position="-2.8 0 0"></a-plane>
+            <a-plane height="2.4" width="2.1" color="#A8E6CF" position="0 1.3 0" rotation="0 0 0" side="double"></a-plane>
+            <a-plane id="door1" src="#door" height="2.6" width="2.1" position="0 -1.2 0" color="rgb(245, 222, 179)" rotation="0 0 0" side="double" toogle-door></a-plane>
+        </a-entity>
+
+        <a-plane height="6" width="9" rotation="90 0 0" position="0 0 3" side="double" src="#floor" material="repeat: 3 3; roughness:1; metalness:0;">
+            <a-box height="7" width="1.5" depth="1.2" position="0 -2.2 -0.5" src="#stage" rotation="0 0 90"></a-box> <!--stage-->
+        </a-plane>
+        <a-plane color="#c3ecdd" height="6" width="9" rotation="90 0 0" position="0 5 3" side="double">
+        </a-plane>
+
+        <a-entity position="15 0 0">
+            <a-plane height="5" width="9" color="#A8E6CF" side="double" position="0 2.5 0">
+                <a-image src="#room2" position="0 1 0.01" width="5.08" height="2"></a-image>
+            </a-plane>
+            <a-plane height="5" width="9" color="#A8E6CF"  rotation="0 90 0" position="-4.5 2.5 4.5" side="double"></a-plane>
+            <a-plane height="5" width="9" color="#A8E6CF" side="double" rotation="0 90 0" position="4.5 2.5 4.5"></a-plane>
+            
+            <a-entity height="5" width="9" position="0 2.5 9">
+                <a-box width="3.5" height="0.15" depth="0.025" color="#D9D9D9" position="-2.8 -2.425 -0.015"></a-box>
+                <a-box width="3.5" height="0.15" depth="0.025" color="#D9D9D9" position="2.8 -2.425 -0.015"></a-box>
+                <a-text value="Poster Display Room" position="-2 1.3 0.01" scale="2 2 2"color="blue"></a-text>
+                <a-plane height="5" width="3.5" color="#A8E6CF" side="double" position="2.8 0 0"></a-plane>
+                <a-plane height="5" width="3.5" color="#A8E6CF" side="double" position="-2.8 0 0"></a-plane>
+                <a-plane height="2.4" width="2.1" color="#A8E6CF" position="0 1.3 0" rotation="0 0 0" side="double"></a-plane>
+                <a-plane id="door2" src="#door" height="2.6" width="2.1" position="0 -1.2 0" color="rgb(245, 222, 179)" rotation="0 0 0" side="double" toogle-door></a-plane>
+            </a-entity>
+            <a-plane height="9" width="9" rotation="90 0 0" position="0 0 4.5" side="double" src="#floor" material="repeat: 3 3; roughness:1; metalness:0;"></a-plane>
+            <a-plane color="#c3ecdd" height="9" width="9" rotation="90 0 0" position="0 5 4.5" side="double"></a-plane>
+            <a-standee poster="#poster" position="-3 0 0.6" rotate="-10 0 0"></a-standee>
+            <a-standee poster="#poster" position="-1 0 0.6" rotate="-10 0 0"></a-standee>
+            <a-standee poster="#poster" position="1 0 0.6" rotate="-10 0 0"></a-standee>
+            <a-standee poster="#poster" position="3 0 0.6" rotate="-10 0 0"></a-standee>
+            <a-standee poster="#poster" position="-4.2 0 2.2" rotate="-10 90 0"></a-standee>
+            <a-standee poster="#poster" position="-4.2 0 3.8" rotate="-10 90 0"></a-standee>
+            <a-standee poster="#poster" position="-4.2 0 5.4" rotate="-10 90 0"></a-standee>
+            <a-standee poster="#poster" position="-4.2 0 7" rotate="-10 90 0"></a-standee>
+            <a-standee poster="#poster" position="4.2 0 2.2" rotate="-10 -90 0"></a-standee>
+            <a-standee poster="#poster" position="4.2 0 3.8" rotate="-10 -90 0"></a-standee>
+            <a-standee poster="#poster" position="4.2 0 5.4" rotate="-10 -90 0"></a-standee>
+            <a-standee poster="#poster" position="4.2 0 7" rotate="-10 -90 0"></a-standee>
+        </a-entity>
+        <a-entity position="-15 0 0">
+             <a-plane height="5" width="9" color="#A8E6CF" side="double" position="0 2.5 0">
+                <a-image src="#room3" position="0 1 0.01" width="5.08" height="2"></a-image>
+            </a-plane>
+            <a-plane height="5" width="9" color="#A8E6CF"  rotation="0 90 0" position="-4.5 2.5 4.5" side="double"></a-plane>
+            <a-plane height="5" width="9" color="#A8E6CF" side="double" rotation="0 90 0" position="4.5 2.5 4.5"></a-plane>
+            
+            <a-entity height="5" width="9" position="0 2.5 9">
+                <a-box width="3.5" height="0.15" depth="0.025" color="#D9D9D9" position="-2.8 -2.425 -0.015"></a-box>
+                <a-box width="3.5" height="0.15" depth="0.025" color="#D9D9D9" position="2.8 -2.425 -0.015"></a-box>
+                <a-text value="Office Room" position="-2 1.3 0.01" scale="2 2 2"color="blue"></a-text>
+                <a-plane height="5" width="3.5" color="#A8E6CF" side="double" position="2.8 0 0"></a-plane>
+                <a-plane height="5" width="3.5" color="#A8E6CF" side="double" position="-2.8 0 0"></a-plane>
+                <a-plane height="2.4" width="2.1" color="#A8E6CF" position="0 1.3 0" rotation="0 0 0" side="double"></a-plane>
+                <a-plane id="door3" src="#door" height="2.6" width="2.1" position="0 -1.2 0" color="rgb(245, 222, 179)" rotation="0 0 0" side="double" toogle-door></a-plane>
+            </a-entity>
+            <a-plane height="9" width="9" rotation="90 0 0" position="0 0 4.5" side="double" src="#floor" material="repeat: 3 3; roughness:1; metalness:0;">
+                <a-desk position="0 0 0" rotation="-90 0 0"></a-desk>
+                <a-chair position="-2 0 0" rotation="-90 0 0"></a-chair>
+                <a-chair position="2 0 0" rotation="-90 0 0"></a-chair>
+            </a-plane>
+            <a-plane color="#c3ecdd" height="9" width="9" rotation="90 0 0" position="0 5 4.5" side="double"></a-plane>
+            
+
+        </a-entity>
+    </a-scene>
+    <script>
+        let currentVideo = null;
+
+        function videoTrig(n){
+            const panel = document.querySelector('#videoPanel');
+            panel.setAttribute('src','#'+n);
+
+            document.querySelectorAll("video").forEach(v=>{
+                v.pause();
+                v.currentTime = 0;
+            });
+
+            currentVideo = document.getElementById(n);
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.querySelector('#playPauseBtn');
+    const text = document.querySelector('#btnText');
+
+    btn.addEventListener('click', () => {
+        if (!currentVideo) return;
+
+        if (currentVideo.paused) {
+            currentVideo.play();
+            text.setAttribute('value', 'Pause');
+        } else {
+            currentVideo.pause();
+            text.setAttribute('value', 'Play');
+        }
+    });
+});
+        
+
+        AFRAME.registerComponent('toogle-door', {
+        init: function () {
+            let isOpen=false;
+            this.el.addEventListener('click', () => {
+                const door=this.el;
+                if (!isOpen) {
+                    door.setAttribute('animation__pos', 'property: position; to: -1 -1.2 1; dur:1000; easing:easeOutQuad');
+                    door.setAttribute('animation__rotate', 'property: rotation; to: 0 -90 0; dur:1000; easing:easeOutQuad');
+                }
+                else {
+                    door.setAttribute('animation__pos', 'property: position; to: 0 -1.2 0; dur:1000; easing:easeOutQuad');
+                    door.setAttribute('animation__rotate', 'property: rotation; to: 0 0 0; dur:1000; easing:easeOutQuad');
+                }
+                isOpen=!isOpen;
+            })
+        }
+    });
+    </script>
+</body>
+</html>

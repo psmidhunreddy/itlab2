@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Table</title>
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+    <div id="header"style="background-color: #225d9c; height:170px; display: flex; justify-content: center;"><img src="assets/school-logo.jpg" id="ulogo" alt="school-logo">
+    </div>
+    <div id="timetable-main">
+        <h1>Time Table Jan 2026</h1>
+        <label>View time table</label>
+        <select id="view" onchange="changeView()" draggable="true">
+            <option selected disabled>Choose</option>
+            <option value="1">by Program</option>
+            <option value="2">by each Elective</option>
+        </select>
+        <select id="program" style="display: none;" onchange="changeProg()">
+            <option selected disabled value="default">Choose Program</option>
+            <option value="MTechCS">MTech CS</option>
+            <option value="MTechAI">MTech AI</option>
+            <option value="IMTII">IMtech II</option>
+            <option value="IMTIV">IMtech IV</option>
+            <option value="IMTVI">IMtech VI</option>
+            <option value="IMTVIII">IMtech VIII</option>
+            <option value="MCAII">MCA II</option>
+        </select>
+        <select id="eElective" style="display: none;" onchange="changeeEle()">
+            <option selected disabled value="default">Choose Course</option>
+            <option value="E1SS">SS</option>
+            <option value="E1NS">NS</option>
+            <option value="E2DL">DL</option>
+            <option value="E2SC">SC</option>
+            <option value="E3ML">ML</option>
+            <option value="E3BCT">BCT</option>
+            <option value="E4ANM">ANM</option>
+            <option value="E4CC">CC</option>
+            <option value="E5CIP">CIP</option>
+            <option value="E5DDPC">DDPC</option>
+            <option value="E6NLP">NLP</option>
+            <option value="E6IOT">IOT</option>
+        </select>
+        <div id="gElective" style="display: none;">
+            <label for="bin1">Bin 1</label>
+            <select id="bin1">
+                <option value="">SS</option>
+                <option value="">NS</option>
+            </select>
+            <label for="bin2">Bin 2</label>
+            <select id="bin2">
+                <option value="">DL</option>
+                <option value="">SC</option>
+            </select>
+            <label for="bin3">Bin 3</label>
+            <select id="bin3">
+                <option value="">ML</option>
+                <option value="">BCT</option>
+            </select>
+            <label for="bin4">Bin 4</label>
+            <select id="bin4">
+                <option value="">ANM</option>
+                <option value="">CC</option>
+            </select>
+            <label for="bin5">Bin 5</label>
+            <select id="bin5">
+                <option value="">CIP</option>
+                <option value="">DDPC</option>
+            </select>
+            <label for="bin5">Bin 6</label>
+            <select id="bin6">
+                <option value="">NLP</option>
+                <option value="">IOT</option>
+            </select>
+            </div>
+        <div id="timetable"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
